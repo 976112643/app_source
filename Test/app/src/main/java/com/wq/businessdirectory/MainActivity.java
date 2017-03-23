@@ -24,6 +24,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 主体
+ */
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.vp_main_center)
     ViewPager vpMainCenter;
