@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">通讯录管理</string>
+    <string name="test_destript">公司简介:\n为房产买卖双方达成销售和购买而建立的一个平台机构，并有为买卖双方保证安全交易的义务。具体事务就是帮卖房人登记房源信息、宣传发布并且保证房源真实有效；帮买房人寻找推荐合适、理想房源，并带领买房人实地看房...，加以引导，促使成交</string>
 </resources>

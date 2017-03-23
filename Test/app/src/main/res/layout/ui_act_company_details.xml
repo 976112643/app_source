@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#EFEFEF"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contentLayout"
+
+        android:layout_above="@+id/layout_bottom_handler"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="阳光在线房地产公司"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_linkman"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autoLink="all"
+                android:text="吴女士 027-89898888"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_company_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="阳光在线7栋"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_update_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="left"
+                android:text="最后更新日期 2017-03-15 22:59:00" />
+            <TextView
+                android:id="@+id/tv_company_destript"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="left"
+                android:lineSpacingMultiplier="1.4"
+                android:text="@string/test_destript" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#FFF"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_lab_history"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="近况"
+                    android:textColor="#333"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_all_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_contact_phone_white_24dp"
+                    android:gravity="center"
+                    android:text="全部" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10dp"
+                android:background="#dddddd" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layout_bottom_handler"
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_alignParentBottom="true"
+        android:layout_height="80dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/cb_collect"
+            android:text="收藏"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorGreeen"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/btn_call"
+            android:text="联系"
+            android:gravity="center"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:drawablePadding="@dimen/x10"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_contact_phone_white_24dp"
+            android:layout_height="match_parent"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
