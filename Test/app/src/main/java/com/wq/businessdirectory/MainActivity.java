@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tencent.bugly.beta.Beta;
+import com.wq.businessdirectory.collect.CollectFragment;
 import com.wq.businessdirectory.common.adapter.ViewPagerFragmentAdapter;
+import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
+import com.wq.businessdirectory.common.db.mode.CompanyBean;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
 import com.wq.businessdirectory.home.HomeFragment;
 import com.wq.support.uibase.BaseFragment;
@@ -23,6 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 /**
  * 主体
@@ -47,13 +51,20 @@ public class MainActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Realm mRealm=Realm.getDefaultInstance();
+                mRealm.beginTransaction();
+                mRealm.where(CollectCompanyBean.class).findAll().deleteAllFromRealm();
+                mRealm.commitTransaction();
+                mRealm.beginTransaction();
+                mRealm.where(CompanyBean.class).findAll().deleteAllFromRealm();
+                mRealm.commitTransaction();
                 ((RecycleViewFragment) mCurrFragment).smoothScrollToTop();
             }
         });
         mFab.setBackgroundColor(Color.parseColor("#5C6BC0"));
         baseFragments = new ArrayList<>();
         baseFragments.add(HomeFragment.newInstance());
-        baseFragments.add(HomeFragment.newInstance());
+        baseFragments.add(CollectFragment.newInstance());
         baseFragments.add(HomeFragment.newInstance());
         mainVPageAdapter = new ViewPagerFragmentAdapter(this.getSupportFragmentManager());
         mainVPageAdapter.setFragments(baseFragments);

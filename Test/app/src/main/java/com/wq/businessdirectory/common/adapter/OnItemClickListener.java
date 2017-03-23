@@ -7,6 +7,6 @@ import android.view.View;
  * Created by WQ on 2017/3/22.
  */
 
-public interface OnItemClickListener {
-    void onItemClick(RecyclerView.Adapter adapter,View view, int position);
+public interface OnItemClickListener<T> {
+    void onItemClick(RecyclerView.Adapter adapter,View view,T mItem, int position);
 }

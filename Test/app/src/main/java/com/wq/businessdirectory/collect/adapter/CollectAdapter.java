@@ -1,4 +1,4 @@
-package com.wq.businessdirectory.home.adapter;
+package com.wq.businessdirectory.collect.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.widget.recyclerview.swipe.ISwipeMenuAdapter;
-import com.wq.businessdirectory.common.adapter.OnItemClickListener;
 import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
 import com.wq.businessdirectory.common.db.mode.CompanyBean;
 
@@ -23,23 +23,23 @@ import io.realm.RealmResults;
  * Created by WQ on 2017/3/22.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> implements ISwipeMenuAdapter {
+public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHolder> implements ISwipeMenuAdapter {
     private static final String TAG = "GirlsAdapter";
 
     private final Context mContext;
-    private  RealmResults<CompanyBean> mData;
+    private RealmResults<CollectCompanyBean> mData;
     private OnItemClickListener mOnItemClickListener;
-    public HomeAdapter(Context mContext,RealmResults<CompanyBean>mData) {
+    public CollectAdapter(Context mContext, RealmResults<CollectCompanyBean>mData) {
         this.mContext = mContext;
         this.mData=mData;
-//        mImages = Image.all(realm);
-        setHasStableIds(true);
-        mData.addChangeListener(new RealmChangeListener<RealmResults<CompanyBean>>() {
+        mData.addChangeListener(new RealmChangeListener<RealmResults<CollectCompanyBean>>() {
             @Override
-            public void onChange(RealmResults<CompanyBean> element) {
+            public void onChange(RealmResults<CollectCompanyBean> element) {
                 notifyDataSetChanged();
             }
         });
+//        mImages = Image.all(realm);
+        setHasStableIds(true);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -67,9 +67,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     }
 
 
+    public interface OnItemClickListener {
+
+        void onItemClick(View view, int pos);
+
+        void onItemLongClick(View view, int pos);
+
+    }
 
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CollectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_2, parent, false));
     }
 
@@ -79,7 +86,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
             @Override
             public void onClick(View view) {
                 if(mOnItemClickListener!=null){
-                    mOnItemClickListener.onItemClick(HomeAdapter.this,view,getItem(position),position);
+                    mOnItemClickListener.onItemClick(view,position);
                 }
             }
         });
@@ -89,12 +96,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 return false;
             }
         });
-        CompanyBean mItem=getItem(position);
+        CompanyBean mItem=getItem(position).companyDetails;
         holder.text1.setText(mItem.company_name);
         holder.text2.setText(mItem.company_phone_name+" "+mItem.company_phone);
     }
 
-    public CompanyBean getItem(int position){
+    public CollectCompanyBean getItem(int position){
         return mData.get(position);
     }
     @Override

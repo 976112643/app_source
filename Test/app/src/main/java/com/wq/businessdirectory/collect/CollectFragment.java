@@ -1,4 +1,4 @@
-package com.wq.businessdirectory.home;
+package com.wq.businessdirectory.collect;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.widget.recyclerview.swipe.Closeable;
@@ -15,9 +14,8 @@ import com.widget.recyclerview.swipe.SwipeMenu;
 import com.widget.recyclerview.swipe.SwipeMenuCreator;
 import com.widget.recyclerview.swipe.SwipeMenuItem;
 import com.widget.recyclerview.swipe.SwipeMenuRecyclerView;
-import com.wq.businessdirectory.MainActivity;
 import com.wq.businessdirectory.R;
-import com.wq.businessdirectory.common.adapter.OnItemClickListener;
+import com.wq.businessdirectory.collect.adapter.CollectAdapter;
 import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
 import com.wq.businessdirectory.common.db.mode.CompanyBean;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
@@ -25,20 +23,20 @@ import com.wq.businessdirectory.home.adapter.HomeAdapter;
 import com.wq.support.utils.ToastUtil;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
-import static android.R.attr.width;
 import static com.widget.recyclerview.swipe.SwipeMenuWrapAdapter.wrapAdapter;
-import static com.wq.businessdirectory.common.db.DBHelper.generateId;
 
 /**
  * Created by WQ on 2017/3/22.
  */
 
-public class HomeFragment extends RecycleViewFragment {
+public class CollectFragment extends RecycleViewFragment {
     int colorGreeen;
-    public static HomeFragment newInstance() {
+    public static CollectFragment newInstance() {
         Bundle args = new Bundle();
-        HomeFragment fragment = new HomeFragment();
+        CollectFragment fragment = new CollectFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +45,7 @@ public class HomeFragment extends RecycleViewFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         colorGreeen=getResources().getColor(R.color.colorGreeen);
+
         SwipeMenuRecyclerView swipeMenuRecyclerView = (SwipeMenuRecyclerView) mRecyclerView;
 //        swipeMenuRecyclerView.setItemViewSwipeEnabled(true);
         // 创建菜单：
@@ -81,38 +80,10 @@ public class HomeFragment extends RecycleViewFragment {
 
     @Override
     protected void loadingMore() {
-        mRealm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                final CompanyBean companyBean = new CompanyBean();
-                companyBean.id=generateId();
-                realm.insertOrUpdate(companyBean);
-            }
-
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                setRefreshLayout(false);
-            }
-        });
     }
 
     @Override
     protected void fetchLatest() {
-        mRealm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                final CompanyBean companyBean = new CompanyBean();
-                companyBean.id=generateId();
-                realm.insertOrUpdate(companyBean);
-            }
-
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                setRefreshLayout(false);
-            }
-        });
     }
 
     @Override
@@ -132,20 +103,9 @@ public class HomeFragment extends RecycleViewFragment {
 
     @Override
     protected RecyclerView.Adapter initAdapter() {
-        HomeAdapter homeAdapter=new HomeAdapter(that, mRealm.where(CompanyBean.class).findAll());
-        homeAdapter.setOnItemClickListener(new OnItemClickListener<CompanyBean>() {
-            @Override
-            public void onItemClick(RecyclerView.Adapter adapter, View view, CompanyBean mItem, int position) {
-                mRealm.beginTransaction();
-                CollectCompanyBean collectCompanyBean=mRealm.createObject(CollectCompanyBean.class);
-                collectCompanyBean.id=generateId();
-                collectCompanyBean.company_id=mItem.id;
-                collectCompanyBean.companyDetails=mItem;
-                mRealm.insertOrUpdate(collectCompanyBean);
-                mRealm.commitTransaction();
-            }
-        });
-        return wrapAdapter(homeAdapter);
+        RealmResults<CollectCompanyBean>realmResults
+                =mRealm.where(CollectCompanyBean.class).findAllSorted("add_time", Sort.DESCENDING);
+        return wrapAdapter(new CollectAdapter(that, realmResults));
     }
 
     @Override

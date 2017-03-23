@@ -1,6 +1,8 @@
 package com.wq.businessdirectory.common.db.mode;
 
-import java.util.Date;
+import com.wq.support.utils.DateUtil;
+
+import java.util.Calendar;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -11,9 +13,16 @@ import io.realm.annotations.PrimaryKey;
 
 public class CompanyBean extends RealmObject {
     @PrimaryKey
-    public int id= (int) (System.currentTimeMillis()/1000);
-    public String companyName="companyName";
-    public String companyPhone=""+(long)(15171438700l+Math.random()*100);
-    public Date addTime=new Date();
-    
+    public int id;
+    public String company_name="c "+ DateUtil.getCurrentDate(DateUtil.dateFormatHMS);
+    public String company_descript;
+    public String company_phone="15171438797";
+    public String company_phone_name="weiquan";
+    public String data_source;
+    public String company_introduction;
+    public int is_delete;
+    public long add_time=System.currentTimeMillis();
+    public long update_time;
+
+
 }

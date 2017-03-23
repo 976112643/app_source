@@ -5,4 +5,8 @@ package com.wq.businessdirectory.common.db;
  */
 
 public class DBHelper {
+
+    public static int generateId(){
+        return String.valueOf(System.currentTimeMillis()).hashCode();
+    }
 }
