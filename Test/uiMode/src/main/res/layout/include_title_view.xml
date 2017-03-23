@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/titlebar_height"
+    android:layout_centerVertical="true"
+    android:background="@color/color_titlebar"
+   >
+
+    <RelativeLayout
+        android:id="@+id/left_back_area"
+        android:layout_width="@dimen/x96"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selec_titlebar_back_">
+
+        <ImageView
+            android:id="@+id/iv_left_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/x20"
+            android:src="@drawable/img_titlebar_back" />
+
+        <TextView
+            android:id="@+id/tv_left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
+            android:text="left"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:focusableInTouchMode="true"
+        android:maxLength="12"
+        android:singleLine="true"
+        android:text="标题"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/right_back_area"
+        android:layout_width="wrap_content"
+        android:minWidth="@dimen/x96"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selec_titlebar_back_"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/iv_right_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/tv_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="保存"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
+             />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

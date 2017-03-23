@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:onClick="click"
+    android:orientation="horizontal" >
+<!--     <com.widget.MultiImageUploadView  -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:id="@+id/imgupload" -->
+<!--         /> -->
+<!-- 
+    <com.myview.editext.SearchView
+        android:id="@+id/lin"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </com.myview.editext.SearchView>
+ -->
+ 
+<!--     <com.widget.banner.AutoScrollViewPager -->
+<!--         android:id="@+id/viewpager" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="450dp" /> -->
+ 
+</LinearLayout>

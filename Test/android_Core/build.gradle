@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 15
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_7
+            targetCompatibility JavaVersion.VERSION_1_7
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:support-v4:' + rootProject.ext.supportLibVersion
+    compile 'com.baidu.mobstat:mtj-sdk:latest.integration'
+    compile files('libs/universal-image-loader-1.9.1.jar')
+    compile files('libs/org.apache.http.legacy.jar')
+    compile files('libs/android-async-http-1.4.8.jar')
+}

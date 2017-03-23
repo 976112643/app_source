@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 主色 -->
+    <color name="status_bar">#f4f4f4</color>
+    <color name="main">#ff5e39</color>
+    <color name="main_black">#ff5F3A</color>
+    <color name="bg">#eeeeee</color>
+    <color name="color_titlebar">#2073ec</color>
+    <!-- 按钮主色 -->
+    <color name="submit_btn">#2099fc</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <!-- 基本文字色 -->
+    <color name="text1">#333333</color>
+    <color name="text2">#444444</color>
+    <color name="text3">#666666</color>
+    <color name="text4">#999999</color>
+    <color name="text5">#cccccc</color>
+    <color name="text_other">#c30100</color>
+    <color name="text_other2">#b76429</color>
+    <color name="fanqie">#fc0909</color>
+    <color name="lvse">#32cd32</color>
+    <color name="guanzhu_lan">#0f88eb</color>
+
+    <!-- 橙色 -->
+    <color name="chengse">#ff7302</color>
+    <!--  -->
+    <color name="submitbtn_disenable">#bbbbbb</color>
+    <color name="submitbtn_default">#F00</color>
+    <color name="smallbtn_round">#f6356f         </color>
+    <color name="bg_some">#f5f5f5</color>
+    <color name="bg_some2">#f9f9f9</color>
+    <color name="top_block">#f63b68 </color>
+
+    <!-- 一些基础颜色 -->
+    <!-- 分割线的颜色 -->
+    <color name="limit_line1">#dddddd</color>
+    <color name="limit_line_shade">#66dddddd</color>
+    <color name="lucency_black__">#55000000</color>
+    <color name="lucency_black">#55000000</color>
+    <color name="lucency_black2">#33000000</color>
+    <color name="lucency_black3">#11000000</color>
+    <color name="lucency">#00000000</color>
+    <color name="lucency_write">#33FFFFFF</color>
+    <color name="title_red">#F74659</color>
+    <color name="red_line">#F85249</color>
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+    <!-- 红色 -->
+    <color name="red">#F00</color>
+    <!-- 半透明白色 -->
+    <color name="lucency_white">#AAFFFFFF</color>
+    <!-- 线的颜色 -->
+    <color name="sheng_hui">#e5e5e5e5</color>
+    <!-- 浅灰色 -->
+    <color name="qianhuise">#666666</color>
+    <!-- 浅灰色2 -->
+    <color name="qianhuise2">#dfdede</color>
+    <!-- 淡灰色 -->
+    <color name="danhuise">#f4f4f4</color>
+    <color name="bq_lan">#00ccff</color>
+    <color name="bq_lv">#66cc66</color>
+    <color name="bq_qing">#33cc99</color>
+    <!-- 黑色透明色 -->
+    <color name="black_lucency">#00000000</color>
+    <color name="black_lucency_11">#11000000</color>
+    <color name="black_lucency_33">#33000000</color>
+    <color name="black_lucency_88">#88000000</color>
+    <color name="black_lucency_99">#99000000</color>
+    <color name="black_lucency_3c">#3C000000</color>
+
+    <drawable name="waveform_selected">#8dffff</drawable>
+    <drawable name="waveform_unselected">#106072</drawable>
+    <drawable name="waveform_unselected_bkgnd_overlay">#bdbcbb</drawable>
+    <drawable name="selection_border">#ffffff</drawable>
+    <drawable name="playback_indicator">#ffff66</drawable>
+    <drawable name="grid_line">#ee01a9a9</drawable>
+    <drawable name="timecode">#ddffffdd</drawable>
+    <drawable name="timecode_shadow">#aa000000</drawable>
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <declare-styleable name="ItemView">
+        <attr name="leftTVText" format="string" />
+        <attr name="leftTVTextDrawLeftImg" format="reference" />
+        <attr name="RightTVText" format="string" />
+        <attr name="RightImgShow" format="boolean" />
+        <attr name="ProgressIsShow" format="boolean" />
+        <attr name="SetRightImg" format="reference" />
+        <attr name="ProgressMaxVal" format="integer" />
+        <attr name="SetRightTextColor" format="color" />
+        <attr name="SetLeftTextColor" format="color" />
+        <attr name="SetRightTextIcom" format="reference" />
+    </declare-styleable>
+</resources>

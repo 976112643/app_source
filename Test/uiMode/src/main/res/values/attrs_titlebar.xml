@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <!-- BaseTitle-->
+    <declare-styleable name="TitleBarLayoutView">
+        <attr name="TitlesLeftIcon" format="reference" />
+        <attr name="TitlesRightIcon" format="reference" />
+        <attr name="TitlesRightTVText" format="string" />
+        <attr name="TitlesLeftTVText" format="string" />
+        <attr name="TitlesText" format="string" />
+        <attr name="TitlesRightIconIsShow" format="boolean" />
+        <attr name="TitlesColor" format="color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wq.support.ui.selectpicture.PhotoSelActivity" >
+
+    <View
+        android:id="@+id/out"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/uicore_func_item"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/camera"
+                style="@style/textStyle3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/uicore_func_item"
+                android:gravity="center"
+                android:text="拍照" />
+
+            <View
+                style="@style/limit_line"
+                android:layout_marginLeft="@dimen/lay_left_right_padding"
+                android:layout_marginRight="@dimen/lay_left_right_padding" />
+
+            <Button
+                android:id="@+id/photo_album"
+                style="@style/textStyle3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/uicore_func_item"
+                android:gravity="center"
+                android:text="从相册选取" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/uicore_func_item"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/cancel"
+                style="@style/textStyle3"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/uicore_func_item"
+                android:gravity="center"
+                android:text="取消" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

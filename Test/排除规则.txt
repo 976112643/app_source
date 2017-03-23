@@ -1,0 +1,7 @@
+﻿工程打压缩包,排除编译及配置文件夹的规则
+
+".gradle" "*\.gradle" ".idea" "*\.idea" "build" "*\build" "*.apk"
+
+
+eclipse 项目排除编译目录规则
+"bin" "*\bin" "*\gen" "gen" "*\.metadata" ".metadata" "*.apk"

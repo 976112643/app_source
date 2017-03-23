@@ -1,0 +1,9 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// sign_config{
+//    keyAlias 'app'
+//    keyPassword '142857'
+//    storeFile file('../app_key')
+//    storePassword '142857'
+//}
+
+
