@@ -51,13 +51,6 @@ public class MainActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Realm mRealm=Realm.getDefaultInstance();
-                mRealm.beginTransaction();
-                mRealm.where(CollectCompanyBean.class).findAll().deleteAllFromRealm();
-                mRealm.commitTransaction();
-                mRealm.beginTransaction();
-                mRealm.where(CompanyBean.class).findAll().deleteAllFromRealm();
-                mRealm.commitTransaction();
                 ((RecycleViewFragment) mCurrFragment).smoothScrollToTop();
             }
         });

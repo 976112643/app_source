@@ -1,5 +1,7 @@
 package com.wq.businessdirectory.common.db.mode;
 
+import com.wq.support.utils.DateUtil;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -16,8 +18,11 @@ public class CollectCompanyBean extends RealmObject {
     public int id;
     public int company_id;
     public CompanyBean companyDetails;
-    public long add_time = System.currentTimeMillis();
+    public long add_time ;
 
+    public String getTime(){
+        return DateUtil.getTimeSimpleText(add_time);
+    }
     public static void addOrDelCollect(Realm mRealm, CompanyBean companyDetails) {
         mRealm.beginTransaction();
         CollectCompanyBean tmpBean= mRealm.where(CollectCompanyBean.class).equalTo("company_id", companyDetails.id).findFirst();
@@ -28,6 +33,7 @@ public class CollectCompanyBean extends RealmObject {
             collectCompanyBean.id=generateId();
             collectCompanyBean.company_id=companyDetails.id;
             collectCompanyBean.companyDetails=companyDetails;
+            collectCompanyBean.add_time= System.currentTimeMillis();
 //            mRealm.insertOrUpdate(collectCompanyBean);
             mRealm.copyToRealmOrUpdate(collectCompanyBean);
 

@@ -1,12 +1,18 @@
 package com.wq.businessdirectory.common.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,4 +162,22 @@ public abstract class RecycleViewFragment extends UIBaseFragment {
     protected abstract RecyclerView.LayoutManager getLayoutManager();
 
     protected abstract int getRecyclerViewId();
+
+
+
+    public void registerReceiver(String  action){
+        if(updateResultReceiver==null){
+            updateResultReceiver=new UpdateResultReceiver();
+        }
+        setRefreshLayout(true);
+        mLocalBroadcastManager.registerReceiver(updateResultReceiver, new IntentFilter(action));
+    }
+    UpdateResultReceiver updateResultReceiver;
+    private class UpdateResultReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            setRefreshLayout(false);
+        }
+    }
+
 }

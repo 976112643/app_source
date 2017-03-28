@@ -97,7 +97,7 @@ public class CollectAdapter extends RecyclerView.Adapter<CollectAdapter.ViewHold
             }
         });
         CompanyBean mItem=getItem(position).companyDetails;
-        holder.text1.setText(mItem.company_name);
+        holder.text1.setText(mItem.company_name+" "+getItem(position).getTime());
         holder.text2.setText(mItem.company_phone_name+" "+mItem.company_phone);
     }
 

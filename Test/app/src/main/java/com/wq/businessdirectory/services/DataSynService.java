@@ -40,19 +40,11 @@ public class DataSynService extends IntentService {
         String action = intent.getAction();
        execute(intent,actionMaps.get(action));
         execute(intent,actionMaps.get("def"));
+        sendResult(intent);
     }
 
-    private void sendResult(Intent intent, Realm realm, int fetched) {
-        realm.close();
-
-        Log.d(TAG, "finished fetching, actual fetched " + fetched);
-
-        Intent broadcast = new Intent();
-//        broadcast.putExtra(EXTRA_FETCHED, fetched)
-//                .putExtra(EXTRA_TRIGGER, intent.getAction())
-//                .putExtra(EXTRA_EXCEPTION_CODE, mExceptionCode)
-//                .putExtra(EXTRA_TYPE, type);
-
+    private void sendResult(Intent intent) {
+        Intent broadcast = new Intent(intent.getAction());
         mLocalBroadcastManager.sendBroadcast(broadcast);
     }
 

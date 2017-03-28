@@ -39,6 +39,7 @@ import static com.wq.businessdirectory.common.net.API.COMPANYS;
 
 public class HomeFragment extends RecycleViewFragment {
     int colorGreeen;
+    int page=1;
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
         HomeFragment fragment = new HomeFragment();
@@ -79,46 +80,25 @@ public class HomeFragment extends RecycleViewFragment {
     @Override
     public void adviceRefresh() {
 //        fetchLatest();
+        registerReceiver(COMPANYS);
         Intent intent=new Intent(that, DataSynService.class);
         intent.setAction(COMPANYS);
+        intent.putExtra("page",page=1);
         that.startService(intent);
         super.adviceRefresh();
     }
 
     @Override
     protected void loadingMore() {
-//        mRealm.executeTransactionAsync(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                final CompanyBean companyBean = new CompanyBean();
-//                companyBean.id=generateId();
-//                realm.insertOrUpdate(companyBean);
-//            }
-//
-//        }, new Realm.Transaction.OnSuccess() {
-//            @Override
-//            public void onSuccess() {
-//                setRefreshLayout(false);
-//            }
-//        });
+        Intent intent=new Intent(that, DataSynService.class);
+        intent.setAction(COMPANYS);
+        intent.putExtra("page",page++);
+        that.startService(intent);
     }
 
     @Override
     protected void fetchLatest() {
-//        mRealm.executeTransactionAsync(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                final CompanyBean companyBean = new CompanyBean();
-//                companyBean.id=generateId();
-//                realm.insertOrUpdate(companyBean);
-//            }
-//
-//        }, new Realm.Transaction.OnSuccess() {
-//            @Override
-//            public void onSuccess() {
-                setRefreshLayout(false);
-//            }
-//        });
+        adviceRefresh();
     }
 
     @Override
