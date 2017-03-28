@@ -61,7 +61,7 @@ public abstract class BaseFragment extends Fragment implements
 
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
-		if (getUserVisibleHint() ){
+		if (getUserVisibleHint()  &&that!=null){
 			adviceRefresh();
 		}
 		super.setUserVisibleHint(isVisibleToUser);

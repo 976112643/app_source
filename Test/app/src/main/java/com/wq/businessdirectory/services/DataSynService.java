@@ -13,6 +13,8 @@ import java.util.Map;
 
 import io.realm.Realm;
 
+import static com.wq.businessdirectory.common.net.API.COMPANYS;
+
 /**
  * Created by WQ on 2017/3/21.
  */
@@ -36,8 +38,8 @@ public class DataSynService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
-        ActionMode.execute(intent,actionMaps.get(action));
-        ActionMode.execute(intent,actionMaps.get("def"));
+       execute(intent,actionMaps.get(action));
+        execute(intent,actionMaps.get("def"));
     }
 
     private void sendResult(Intent intent, Realm realm, int fetched) {
@@ -55,6 +57,20 @@ public class DataSynService extends IntentService {
     }
 
     {
-        actionMaps.put("companys", CompanySynMode.class);
+        actionMaps.put(COMPANYS, CompanySynMode.class);
+    }
+
+    static void execute(Intent intent,Class<? extends ActionMode> clazz){
+        if(clazz!=null){
+            try {
+                ActionMode actionMode=clazz.newInstance();
+                actionMode.execute(intent);
+                actionMode.close();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

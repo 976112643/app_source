@@ -1,5 +1,6 @@
 package com.wq.businessdirectory.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
 import com.wq.businessdirectory.common.db.mode.CompanyBean;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
 import com.wq.businessdirectory.home.adapter.HomeAdapter;
+import com.wq.businessdirectory.services.DataSynService;
 import com.wq.support.utils.ToastUtil;
 
 import io.realm.Realm;
@@ -29,6 +31,7 @@ import io.realm.Realm;
 import static android.R.attr.width;
 import static com.widget.recyclerview.swipe.SwipeMenuWrapAdapter.wrapAdapter;
 import static com.wq.businessdirectory.common.db.DBHelper.generateId;
+import static com.wq.businessdirectory.common.net.API.COMPANYS;
 
 /**
  * Created by WQ on 2017/3/22.
@@ -76,29 +79,46 @@ public class HomeFragment extends RecycleViewFragment {
     @Override
     public void adviceRefresh() {
 //        fetchLatest();
+        Intent intent=new Intent(that, DataSynService.class);
+        intent.setAction(COMPANYS);
+        that.startService(intent);
         super.adviceRefresh();
     }
 
     @Override
     protected void loadingMore() {
-        mRealm.executeTransactionAsync(realm -> {
-            final CompanyBean companyBean = new CompanyBean();
-            companyBean.id=generateId();
-            realm.insertOrUpdate(companyBean);
-        }, () -> {
-            setRefreshLayout(false);
-        });
+//        mRealm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                final CompanyBean companyBean = new CompanyBean();
+//                companyBean.id=generateId();
+//                realm.insertOrUpdate(companyBean);
+//            }
+//
+//        }, new Realm.Transaction.OnSuccess() {
+//            @Override
+//            public void onSuccess() {
+//                setRefreshLayout(false);
+//            }
+//        });
     }
 
     @Override
     protected void fetchLatest() {
-        mRealm.executeTransactionAsync(realm -> {
-            final CompanyBean companyBean = new CompanyBean();
-            companyBean.id=generateId();
-            realm.insertOrUpdate(companyBean);
-        }, () -> {
-            setRefreshLayout(false);
-        });
+//        mRealm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                final CompanyBean companyBean = new CompanyBean();
+//                companyBean.id=generateId();
+//                realm.insertOrUpdate(companyBean);
+//            }
+//
+//        }, new Realm.Transaction.OnSuccess() {
+//            @Override
+//            public void onSuccess() {
+                setRefreshLayout(false);
+//            }
+//        });
     }
 
     @Override

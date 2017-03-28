@@ -8,15 +8,5 @@ import android.content.Intent;
 
 public interface ActionMode {
      void execute(Intent intent);
-     public static void execute(Intent intent,Class<? extends ActionMode> clazz){
-          if(clazz!=null){
-               try {
-                    clazz.newInstance().execute(intent);
-               } catch (InstantiationException e) {
-                    e.printStackTrace();
-               } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-               }
-          }
-     }
+     void close();
 }

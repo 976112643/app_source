@@ -36,8 +36,13 @@ public class App extends BaseApplication {
         super.onCreate();
         Bugly.init(this, "0c3b5f9893", true);
         CrashReport.initCrashReport(getApplicationContext(), "0c3b5f9893", true);
-        Realm.init(this);
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
+//        Realm.init(this);
+//        Realm.getInstance()
+//        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
+//                .schemaVersion(1)
+//                .deleteRealmIfMigrationNeeded()
+//                .build());
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(this)
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build());

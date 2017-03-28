@@ -27,11 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
     compile 'com.android.support:recyclerview-v7:' + rootProject.ext.supportLibVersion
     compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
-    compile files('libs/aliyun-oss-sdk-android-2.3.0.jar')
     compile files('libs/MobCommons-2016.0707.1708.jar')
     compile files('libs/MobTools-2016.0707.1708.jar')
-    compile files('libs/okhttp-3.4.1.jar')
-    compile files('libs/okio-1.10.0.jar')
     compile files('libs/ShareSDK-Core-2.7.4.jar')
     compile files('libs/ShareSDK-QQ-2.7.4.jar')
     compile files('libs/ShareSDK-QZone-2.7.4.jar')
