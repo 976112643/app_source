@@ -23,6 +23,7 @@ public class CompanySynMode implements ActionMode {
     @Override
     public void execute(Intent intent) {
 //        CompanyBean firstBean=mRealm.where(CompanyBean.class).findAllSorted("update_time", Sort.DESCENDING).first();
+
         try {
             BaseBean<List<CompanyBean>> baseBean = APIManager.getAPI().companys(1).execute().body();
             List<CompanyBean> companyBeanList = baseBean.Data();
