@@ -81,37 +81,23 @@ public class HomeFragment extends RecycleViewFragment {
 
     @Override
     protected void loadingMore() {
-        mRealm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                final CompanyBean companyBean = new CompanyBean();
-                companyBean.id=generateId();
-                realm.insertOrUpdate(companyBean);
-            }
-
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                setRefreshLayout(false);
-            }
+        mRealm.executeTransactionAsync(realm -> {
+            final CompanyBean companyBean = new CompanyBean();
+            companyBean.id=generateId();
+            realm.insertOrUpdate(companyBean);
+        }, () -> {
+            setRefreshLayout(false);
         });
     }
 
     @Override
     protected void fetchLatest() {
-        mRealm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                final CompanyBean companyBean = new CompanyBean();
-                companyBean.id=generateId();
-                realm.insertOrUpdate(companyBean);
-            }
-
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                setRefreshLayout(false);
-            }
+        mRealm.executeTransactionAsync(realm -> {
+            final CompanyBean companyBean = new CompanyBean();
+            companyBean.id=generateId();
+            realm.insertOrUpdate(companyBean);
+        }, () -> {
+            setRefreshLayout(false);
         });
     }
 
@@ -136,13 +122,7 @@ public class HomeFragment extends RecycleViewFragment {
         homeAdapter.setOnItemClickListener(new OnItemClickListener<CompanyBean>() {
             @Override
             public void onItemClick(RecyclerView.Adapter adapter, View view, CompanyBean mItem, int position) {
-                mRealm.beginTransaction();
-                CollectCompanyBean collectCompanyBean=mRealm.createObject(CollectCompanyBean.class);
-                collectCompanyBean.id=generateId();
-                collectCompanyBean.company_id=mItem.id;
-                collectCompanyBean.companyDetails=mItem;
-                mRealm.insertOrUpdate(collectCompanyBean);
-                mRealm.commitTransaction();
+                CollectCompanyBean.addOrDelCollect(mRealm,mItem);
             }
         });
         return wrapAdapter(homeAdapter);

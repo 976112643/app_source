@@ -5,6 +5,12 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.wq.businessdirectory.services.mode.ActionMode;
+import com.wq.businessdirectory.services.mode.CompanySynMode;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import io.realm.Realm;
 
 /**
@@ -14,6 +20,8 @@ import io.realm.Realm;
 public class DataSynService extends IntentService {
     private static final String TAG = "DataSynService";
     private LocalBroadcastManager mLocalBroadcastManager;
+    Map<String, Class<? extends ActionMode>> actionMaps = new HashMap<>();
+
     public DataSynService() {
         super(TAG);
     }
@@ -27,7 +35,9 @@ public class DataSynService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
+        String action = intent.getAction();
+        ActionMode.execute(intent,actionMaps.get(action));
+        ActionMode.execute(intent,actionMaps.get("def"));
     }
 
     private void sendResult(Intent intent, Realm realm, int fetched) {
@@ -42,5 +52,9 @@ public class DataSynService extends IntentService {
 //                .putExtra(EXTRA_TYPE, type);
 
         mLocalBroadcastManager.sendBroadcast(broadcast);
+    }
+
+    {
+        actionMaps.put("companys", CompanySynMode.class);
     }
 }
