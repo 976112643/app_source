@@ -16,6 +16,7 @@ import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
 import com.wq.businessdirectory.common.db.mode.CompanyBean;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
 import com.wq.businessdirectory.home.HomeFragment;
+import com.wq.businessdirectory.test.TestFragment;
 import com.wq.support.uibase.BaseFragment;
 import com.wq.support.utils.ToastUtil;
 import com.wq.support.utils.Utils;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Fragment> baseFragments;
     private RecycleViewFragment homeFragment;
     ViewPagerFragmentAdapter mainVPageAdapter;
-    RecycleViewFragment mCurrFragment;
+    Fragment mCurrFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         baseFragments = new ArrayList<>();
         baseFragments.add(HomeFragment.newInstance());
         baseFragments.add(CollectFragment.newInstance());
-        baseFragments.add(HomeFragment.newInstance());
+        baseFragments.add(TestFragment.newInstance());
         mainVPageAdapter = new ViewPagerFragmentAdapter(this.getSupportFragmentManager());
         mainVPageAdapter.setFragments(baseFragments);
         vpMainCenter.setAdapter(mainVPageAdapter);
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if(vpMainCenter.getCurrentItem()!=currentIndex) {
             vpMainCenter.setCurrentItem(currentIndex);//false 不显示翻页动画效果
         }
-        mCurrFragment= (RecycleViewFragment) baseFragments.get(currentIndex);
+        mCurrFragment= baseFragments.get(currentIndex);
         for (int i = 0; i < linMainButtom.getChildCount(); i++) {
             linMainButtom.getChildAt(i).setSelected(currentIndex == i);
         }

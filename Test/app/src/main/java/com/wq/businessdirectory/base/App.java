@@ -1,13 +1,17 @@
 package com.wq.businessdirectory.base;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.multidex.MultiDex;
+import android.webkit.WebView;
 
+import com.facebook.stetho.Stetho;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 import com.wq.base.BaseApplication;
 
 import io.realm.Realm;
@@ -37,7 +41,6 @@ public class App extends BaseApplication {
         Bugly.init(this, "0c3b5f9893", true);
         CrashReport.initCrashReport(getApplicationContext(), "0c3b5f9893", true);
 //        Realm.init(this);
-//        Realm.getInstance()
 //        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
 //                .schemaVersion(1)
 //                .deleteRealmIfMigrationNeeded()
@@ -46,5 +49,15 @@ public class App extends BaseApplication {
                 .schemaVersion(1)
                 .deleteRealmIfMigrationNeeded()
                 .build());
+        Stetho.initialize(//Stetho初始化
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
     }
 }

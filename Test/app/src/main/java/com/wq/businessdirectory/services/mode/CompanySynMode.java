@@ -34,7 +34,7 @@ public class CompanySynMode implements ActionMode {
                 }
             }
             Logger.D(companyBeanList+"");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -77,6 +77,8 @@ dependencies {
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'com.facebook.stetho:stetho:1.4.1' //添加这两行
+    compile 'com.uphyca:stetho_realm:0.9.0'
     testCompile 'junit:junit:4.12'
     compile project(':uiMode')
 }
