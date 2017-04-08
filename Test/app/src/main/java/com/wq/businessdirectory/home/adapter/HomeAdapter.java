@@ -91,6 +91,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         CompanyBean mItem = getItem(position);
         holder.tvCompanyName.setText(mItem.company_name);
         holder.tvLinkman.setText(mItem.company_phone_name + " " + mItem.company_phone);
+        holder.tvCompanyAddress.setText(mItem.company_descript);
     }
 
     public CompanyBean getItem(int position) {
