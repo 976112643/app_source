@@ -27,6 +27,7 @@ public class App extends BaseApplication {
 //        super(ShareConstants.TINKER_ENABLE_ALL, SampleApplicationLike.class.getName(),
 //                "com.tencent.tinker.loader.TinkerLoader", false);
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -35,6 +36,7 @@ public class App extends BaseApplication {
         // 安装tinker
         Beta.installTinker();
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
