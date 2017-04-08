@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.widget.recyclerview.swipe.ISwipeMenuAdapter;
-import com.wq.businessdirectory.common.adapter.OnItemClickListener;
-import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
-import com.wq.businessdirectory.common.db.mode.CompanyBean;
 
-import java.util.List;
+import com.widget.recyclerview.swipe.ISwipeMenuAdapter;
+import com.wq.businessdirectory.R;
+import com.wq.businessdirectory.common.adapter.OnItemClickListener;
+import com.wq.businessdirectory.common.db.mode.CompanyBean;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,11 +26,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     private static final String TAG = "GirlsAdapter";
 
     private final Context mContext;
-    private  RealmResults<CompanyBean> mData;
+    private RealmResults<CompanyBean> mData;
     private OnItemClickListener mOnItemClickListener;
-    public HomeAdapter(Context mContext,RealmResults<CompanyBean>mData) {
+
+    public HomeAdapter(Context mContext, RealmResults<CompanyBean> mData) {
         this.mContext = mContext;
-        this.mData=mData;
+        this.mData = mData;
 //        mImages = Image.all(realm);
         setHasStableIds(true);
         mData.addChangeListener(new RealmChangeListener<RealmResults<CompanyBean>>() {
@@ -53,7 +53,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
 
     @Override
     public View onCreateContentView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_2, parent, false);
+        return LayoutInflater.from(mContext).inflate(R.layout.item_home_company, parent, false);
     }
 
     @Override
@@ -67,10 +67,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
     }
 
 
-
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_2, parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_home_company, parent, false));
     }
 
     @Override
@@ -78,8 +77,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mOnItemClickListener!=null){
-                    mOnItemClickListener.onItemClick(HomeAdapter.this,view,getItem(position),position);
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(HomeAdapter.this, view, getItem(position), position);
                 }
             }
         });
@@ -89,24 +88,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> im
                 return false;
             }
         });
-        CompanyBean mItem=getItem(position);
-        holder.text1.setText(mItem.company_name);
-        holder.text2.setText(mItem.company_phone_name+" "+mItem.company_phone);
+        CompanyBean mItem = getItem(position);
+        holder.tvCompanyName.setText(mItem.company_name);
+        holder.tvLinkman.setText(mItem.company_phone_name + " " + mItem.company_phone);
     }
 
-    public CompanyBean getItem(int position){
+    public CompanyBean getItem(int position) {
         return mData.get(position);
     }
+
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
+    static
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(android.R.id.text1)
-        public TextView text1 ;
-        @Bind(android.R.id.text2)
-        public TextView text2 ;
+        @Bind(R.id.tv_company_name)
+        TextView tvCompanyName;
+        @Bind(R.id.tv_linkman)
+        TextView tvLinkman;
+        @Bind(R.id.tv_company_address)
+        TextView tvCompanyAddress;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
