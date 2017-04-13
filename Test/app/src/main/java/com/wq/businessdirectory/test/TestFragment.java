@@ -74,6 +74,7 @@ public class TestFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         registerSMSReceiver();
         registerPhoneReceiver();
+
         imgview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
