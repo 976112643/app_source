@@ -9,7 +9,6 @@
         android:id="@+id/tv_company_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_home_light_green_600_24dp"
         android:drawablePadding="@dimen/x10"
         android:text="阳光在线房地产公司"
         android:textColor="#666666"
@@ -21,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autoLink="all"
-        android:drawableLeft="@drawable/ic_contact_phone_green_600_24dp"
         android:drawablePadding="@dimen/x10"
         android:text="吴女士 027-89898888"
         android:textSize="14sp" />
@@ -31,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_location_on_green_600_24dp"
         android:drawablePadding="@dimen/x10"
         android:text="阳光在线7栋"
         android:textSize="14sp" />

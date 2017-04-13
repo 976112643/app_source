@@ -28,7 +28,8 @@
 
         <activity android:name="com.wq.support.ui.selectpicture.PhotoSelActivity" >
         </activity>
-
+        <activity android:name="com.wq.support.ui.selectpicture.MulitImageAct" >
+        </activity>
         <service android:name="com.wq.support.utils.music.MusicService" >
         </service>
     </application>

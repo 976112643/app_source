@@ -69,7 +69,6 @@ public  class SecureImageDownloader extends BaseImageDownloader {
  
         @Override
         public InputStream getStreamFromNetwork(String imageUri, Object extra) throws IOException {
- 
             HttpURLConnection conn = (HttpURLConnection) new URL(imageUri).openConnection();
             conn.setConnectTimeout(connectTimeout);
             conn.setReadTimeout(readTimeout);
@@ -85,9 +84,14 @@ public  class SecureImageDownloader extends BaseImageDownloader {
  
             return new BufferedInputStream(conn.getInputStream(), BUFFER_SIZE);
         }
- 
-         
-        /**
+
+    @Override
+    protected InputStream getStreamFromOtherSource(String imageUri, Object extra) throws IOException {
+        imageUri="file://"+imageUri;
+        return super.getStreamFromFile(imageUri, extra);
+    }
+
+    /**
          * https协议下的图片加载
          * @author WQ 上午10:44:55
          */

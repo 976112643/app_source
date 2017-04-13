@@ -9,15 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.tencent.bugly.beta.Beta;
-import com.wq.businessdirectory.collect.CollectFragment;
 import com.wq.businessdirectory.common.adapter.ViewPagerFragmentAdapter;
-import com.wq.businessdirectory.common.db.mode.CollectCompanyBean;
-import com.wq.businessdirectory.common.db.mode.CompanyBean;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
-import com.wq.businessdirectory.home.HomeFragment;
 import com.wq.businessdirectory.test.TestFragment;
-import com.wq.support.uibase.BaseFragment;
 import com.wq.support.utils.ToastUtil;
 import com.wq.support.utils.Utils;
 
@@ -27,7 +23,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
 
 /**
  * 主体
@@ -35,20 +30,20 @@ import io.realm.Realm;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.vp_main_center)
     ViewPager vpMainCenter;
-    @Bind(R.id.lin_main_buttom)
-    LinearLayout linMainButtom;
     @Bind((R.id.fab))
     FloatingActionButton mFab;
     private List<Fragment> baseFragments;
     private RecycleViewFragment homeFragment;
     ViewPagerFragmentAdapter mainVPageAdapter;
     Fragment mCurrFragment;
+    @Bind((R.id.sliding_tabs))
+    SlidingTabLayout sliding_tabs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Beta.checkUpgrade();
+        Beta.checkUpgrade(true,true);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,27 +52,31 @@ public class MainActivity extends AppCompatActivity {
         });
         mFab.setBackgroundColor(Color.parseColor("#5C6BC0"));
         baseFragments = new ArrayList<>();
-        baseFragments.add(HomeFragment.newInstance());
-        baseFragments.add(CollectFragment.newInstance());
+//        baseFragments.add(HomeFragment.newInstance());
+//        baseFragments.add(CollectFragment.newInstance());
         baseFragments.add(TestFragment.newInstance());
         mainVPageAdapter = new ViewPagerFragmentAdapter(this.getSupportFragmentManager());
         mainVPageAdapter.setFragments(baseFragments);
+        mainVPageAdapter.addTitle("测试");
+        mainVPageAdapter.addTitle("测试");
+        mainVPageAdapter.addTitle("测试");
         vpMainCenter.setAdapter(mainVPageAdapter);
 //        vpMainCenter.setOffscreenPageLimit(baseFragments.size());//全部缓存下来
-        vpMainCenter.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-            @Override
-            public void onPageSelected(int position) {
-                setSelected(position);
-
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-        setSelected(0);
+//        vpMainCenter.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//            @Override
+//            public void onPageSelected(int position) {
+////                setSelected(position);
+//
+//            }
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//            }
+//        });
+//        setSelected(0);
+        sliding_tabs.setViewPager(vpMainCenter);
     }
 
     @Override
@@ -89,29 +88,29 @@ public class MainActivity extends AppCompatActivity {
             ToastUtil.shortM("再按一次退出程序");
         }
     }
-    public void setSelected(int currentIndex) {
-        if(vpMainCenter.getCurrentItem()!=currentIndex) {
-            vpMainCenter.setCurrentItem(currentIndex);//false 不显示翻页动画效果
-        }
-        mCurrFragment= baseFragments.get(currentIndex);
-        for (int i = 0; i < linMainButtom.getChildCount(); i++) {
-            linMainButtom.getChildAt(i).setSelected(currentIndex == i);
-        }
-    }
-    @OnClick({R.id.lin1, R.id.lin2, R.id.lin3})
-    public void onClick(View view) {
-        int currentIndex=0;
-        switch (view.getId()) {
-            case R.id.lin1:
-                currentIndex=0;
-                break;
-            case R.id.lin2:
-                currentIndex=1;
-                break;
-            case R.id.lin3:
-                currentIndex=2;
-                break;
-        }
-        setSelected(currentIndex);
-    }
+//    public void setSelected(int currentIndex) {
+//        if(vpMainCenter.getCurrentItem()!=currentIndex) {
+//            vpMainCenter.setCurrentItem(currentIndex);//false 不显示翻页动画效果
+//        }
+//        mCurrFragment= baseFragments.get(currentIndex);
+//        for (int i = 0; i < linMainButtom.getChildCount(); i++) {
+//            linMainButtom.getChildAt(i).setSelected(currentIndex == i);
+//        }
+//    }
+//    @OnClick({R.id.lin1, R.id.lin2, R.id.lin3})
+//    public void onClick(View view) {
+//        int currentIndex=0;
+//        switch (view.getId()) {
+//            case R.id.lin1:
+//                currentIndex=0;
+//                break;
+//            case R.id.lin2:
+//                currentIndex=1;
+//                break;
+//            case R.id.lin3:
+//                currentIndex=2;
+//                break;
+//        }
+//        setSelected(currentIndex);
+//    }
 }

@@ -3,16 +3,23 @@ package com.wq.support.ui.selectpicture;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.wq.support.dialogs.DialogFactory;
 import com.wq.support.ui.UIBaseActivity;
@@ -54,7 +61,18 @@ public class PhotoSelActivity extends UIBaseActivity {
 			@Override
 			public void onClick(View v) {
 				selHead.dismiss();
-				uri = UiUtils.startCamera(PhotoSelActivity.this);
+				checkPermission(Manifest.permission.CAMERA, new PermissionCheckedCallback() {
+					@Override
+					public void permissionGrant() {
+						uri = UiUtils.startCamera(PhotoSelActivity.this);
+					}
+
+					@Override
+					public void permissionDenied() {
+						dealPermissionDenied("拍照权限被拒绝!");
+					}
+				});
+
 			}
 		});
 		dialogView.findViewById(R.id.photo_album).setOnClickListener(new OnClickListener() {
@@ -64,7 +82,19 @@ public class PhotoSelActivity extends UIBaseActivity {
 				selHead.dismiss();
 				if(isMuit){
 					//多选模式
-					selectMuitPhoto(PhotoSelActivity.this, getIntent());
+
+					checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, new PermissionCheckedCallback() {
+						@Override
+						public void permissionGrant() {
+							selectMuitPhoto(PhotoSelActivity.this, getIntent());
+						}
+
+						@Override
+						public void permissionDenied() {
+							dealPermissionDenied("文件读取权限被拒绝!");
+						}
+					});
+
 				}else {
 					UiUtils.selectPhoto(PhotoSelActivity.this);
 				}
@@ -93,6 +123,12 @@ public class PhotoSelActivity extends UIBaseActivity {
 			}
 		});
 	}
+
+	private void dealPermissionDenied(String toastMsg) {
+		Toast.makeText(this,toastMsg,Toast.LENGTH_SHORT).show();
+		finish();
+	}
+
 	/**
 	 * 选择图片,多选
 	 * 
@@ -117,6 +153,36 @@ public class PhotoSelActivity extends UIBaseActivity {
 		finish();
 	}
 
+
+	PermissionCheckedCallback tmpPermissionCallback;
+	public void checkPermission(String permission,PermissionCheckedCallback call){
+		if(PackageManager.PERMISSION_GRANTED==ContextCompat.checkSelfPermission(this,permission)){
+			call.permissionGrant();
+		}else {
+			if (Build.VERSION.SDK_INT >= 23) {//6.0及以上
+				this.tmpPermissionCallback=call;
+				ActivityCompat.requestPermissions(this,new String[]{permission},0x101);
+			} else {
+				call.permissionDenied();
+			}
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if(tmpPermissionCallback!=null) {
+			if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+				tmpPermissionCallback.permissionGrant();
+			}else {
+				tmpPermissionCallback.permissionDenied();
+			}
+		}
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+	public abstract class   PermissionCheckedCallback{
+		public  void permissionGrant(){}
+		public  void permissionDenied(){}
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//

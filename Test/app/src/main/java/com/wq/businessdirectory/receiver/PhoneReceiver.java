@@ -9,6 +9,7 @@ import android.telephony.TelephonyManager;
 
 import com.wq.support.utils.log.Logger;
 
+import static com.wq.businessdirectory.receiver.LocalBroadcastHelper.CALL_STATE_OUT;
 import static com.wq.businessdirectory.receiver.LocalBroadcastHelper.sendMessageBroadcast;
 import static com.wq.businessdirectory.receiver.LocalBroadcastHelper.sendPhoneBroadcast;
 
@@ -21,6 +22,8 @@ public class PhoneReceiver extends BroadcastReceiver {
             String phoneNumber = intent
                     .getStringExtra(Intent.EXTRA_PHONE_NUMBER);
             Logger.D("拨打电话: "+phoneNumber);
+
+            sendPhoneBroadcast(context,CALL_STATE_OUT,phoneNumber);
         } else {
             //查了下android文档，貌似没有专门用于接收来电的action,所以，非去电即来电.
             //如果我们想要监听电话的拨打状况，需要这么几步 :
@@ -33,6 +36,7 @@ public class PhoneReceiver extends BroadcastReceiver {
              *第四步：这一步很重要，那就是给应用添加权限。android.permission.READ_PHONE_STATE*/
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
             tm.listen(new PhoneStateListener() {
+
                 @Override
                 public void onCallStateChanged(int state, String incomingNumber) {
                     //注意，方法必须写在super方法后面，否则incomingNumber无法获取到值。

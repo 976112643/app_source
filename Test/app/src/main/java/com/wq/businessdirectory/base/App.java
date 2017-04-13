@@ -5,14 +5,17 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.webkit.WebView;
 
+import com.bilibili.boxing.BoxingCrop;
+import com.bilibili.boxing.BoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaLoader;
 import com.facebook.stetho.Stetho;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.tencent.tinker.loader.app.TinkerApplication;
-import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 import com.wq.base.BaseApplication;
+import com.wq.businessdirectory.common.config.boxing.BoxingGlideLoader;
+import com.wq.businessdirectory.common.config.boxing.BoxingUcrop;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -56,7 +59,9 @@ public class App extends BaseApplication {
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                         .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                         .build());
-
+        IBoxingMediaLoader loader = new BoxingGlideLoader();
+        BoxingMediaLoader.getInstance().init(loader);
+        BoxingCrop.getInstance().init(new BoxingUcrop());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }

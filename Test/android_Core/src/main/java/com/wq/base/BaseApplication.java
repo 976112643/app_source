@@ -12,6 +12,7 @@ import android.os.Build;
 
 import com.wq.support.uibase.BaseFragment;
 import com.wq.support.utils.AppUtils;
+import com.wq.support.utils.SecureImageDownloader;
 import com.wq.support.utils.log.Logger;
 import com.wq.support.utils.statiscs.StatisticsUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -69,6 +70,7 @@ public class BaseApplication extends Application {
 				.denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.memoryCache(new WeakMemoryCache())
+				.imageDownloader(new SecureImageDownloader(this))
 				.memoryCacheSize((int) (2 * 1024 * 1024))
 				.tasksProcessingOrder(QueueProcessingType.LIFO);
 	}
