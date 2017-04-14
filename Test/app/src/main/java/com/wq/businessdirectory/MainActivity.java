@@ -13,6 +13,8 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.tencent.bugly.beta.Beta;
 import com.wq.businessdirectory.common.adapter.ViewPagerFragmentAdapter;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
+import com.wq.businessdirectory.test.PhoneFragment;
+import com.wq.businessdirectory.test.SmsFragment;
 import com.wq.businessdirectory.test.TestFragment;
 import com.wq.support.utils.ToastUtil;
 import com.wq.support.utils.Utils;
@@ -55,27 +57,15 @@ public class MainActivity extends AppCompatActivity {
 //        baseFragments.add(HomeFragment.newInstance());
 //        baseFragments.add(CollectFragment.newInstance());
         baseFragments.add(TestFragment.newInstance());
+        baseFragments.add(SmsFragment.newInstance());
+        baseFragments.add(PhoneFragment.newInstance());
+
         mainVPageAdapter = new ViewPagerFragmentAdapter(this.getSupportFragmentManager());
         mainVPageAdapter.setFragments(baseFragments);
         mainVPageAdapter.addTitle("测试");
-        mainVPageAdapter.addTitle("测试");
-        mainVPageAdapter.addTitle("测试");
+        mainVPageAdapter.addTitle("短信");
+        mainVPageAdapter.addTitle("电话");
         vpMainCenter.setAdapter(mainVPageAdapter);
-//        vpMainCenter.setOffscreenPageLimit(baseFragments.size());//全部缓存下来
-//        vpMainCenter.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//            @Override
-//            public void onPageSelected(int position) {
-////                setSelected(position);
-//
-//            }
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//        });
-//        setSelected(0);
         sliding_tabs.setViewPager(vpMainCenter);
     }
 

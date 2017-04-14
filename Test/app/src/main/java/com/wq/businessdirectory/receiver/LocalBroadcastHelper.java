@@ -17,9 +17,9 @@ public class LocalBroadcastHelper {
     public static final String EXTRA_PHONE_STATE = "EXTRA_PHONE_STATE";
     public static final int CALL_STATE_OUT = 0x0911;
     public static void sendMessageBroadcast(Context context, PhoneMessage phoneMessage) {
-        Intent broadcast = new Intent(ACTION_MESSAGE)
-                .putExtra(EXTRA_MESSAGE, phoneMessage);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcast);
+//        Intent broadcast = new Intent(ACTION_MESSAGE)
+//                .putExtra(EXTRA_MESSAGE, phoneMessage);
+//        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcast);
     }
 
     public static void sendPhoneBroadcast(Context context, int state, String incomingNumber) {

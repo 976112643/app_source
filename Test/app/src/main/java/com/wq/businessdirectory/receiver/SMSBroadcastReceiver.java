@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import io.realm.Realm;
+
 import static com.wq.businessdirectory.receiver.LocalBroadcastHelper.sendMessageBroadcast;
 
 /**
@@ -16,12 +18,11 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-//        LogUtils.d("----> SMSBroadcastReceiver onReceive");
         if (intent.getAction().equals(SMS_RECEIVED_ACTION)) {
             PhoneMessage phoneMessage = SMSUtil.generateMessage(intent);
             sendMessageBroadcast(context,phoneMessage);
+            PhoneMessage.addSMS(Realm.getDefaultInstance(),phoneMessage);
             //abortBroadcast();
         }
-
     }
 }

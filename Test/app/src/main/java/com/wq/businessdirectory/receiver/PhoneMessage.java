@@ -1,12 +1,24 @@
 package com.wq.businessdirectory.receiver;
 
+import android.content.Context;
+
 import java.io.Serializable;
+
+import io.realm.Realm;
+import io.realm.RealmObject;
 
 /**
  */
-public class PhoneMessage implements Serializable {
+public class PhoneMessage extends RealmObject {
     String phone;
     String content;
+    String addtime;
+    long add_time=System.currentTimeMillis();
+    public static void addSMS(Realm realm,PhoneMessage phoneMessage){
+        realm.beginTransaction();
+        realm.copyToRealm(phoneMessage);
+        realm.commitTransaction();
+    }
     @Override
     public String toString() {
         return "PhoneMessage{" +
@@ -24,7 +36,7 @@ public class PhoneMessage implements Serializable {
         this.addtime = addtime;
     }
 
-    String addtime;
+
 
     public String getPhone() {
         return phone;
@@ -43,16 +55,4 @@ public class PhoneMessage implements Serializable {
         this.content = content;
     }
 
-    public  static class  Contacts implements Serializable{
-        String phone="1213";
-        String name="4567";
-
-        @Override
-        public String toString() {
-            return "Contacts{" +
-                    "phone='" + phone + '\'' +
-                    ", name='" + name + '\'' +
-                    '}';
-        }
-    }
 }
