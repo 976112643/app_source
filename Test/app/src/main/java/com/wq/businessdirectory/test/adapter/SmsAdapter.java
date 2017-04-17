@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wq.businessdirectory.R;
-import com.wq.businessdirectory.receiver.PhoneMessage;
+import com.wq.businessdirectory.receiver.mode.PhoneMessage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
