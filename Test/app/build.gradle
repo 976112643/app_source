@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
+//添加如下代码，应用apt插件
+apply plugin: 'com.neenbedankt.android-apt'
 //apply from: 'build-support.gradle'
 android {
     compileSdkVersion 24
@@ -86,10 +88,15 @@ dependencies {
     //图片选择
     compile 'com.bilibili:boxing-impl:0.4.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     //realm调试
     compile 'com.facebook.stetho:stetho:1.4.1' //添加这两行
     compile 'com.uphyca:stetho_realm:0.9.0'
+    //dagger2 配置
+    compile 'com.google.dagger:dagger:2.4'
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    //java注解
+    compile 'org.glassfish:javax.annotation:10.0-b28'
     testCompile 'junit:junit:4.12'
     compile project(':uiMode')
 }

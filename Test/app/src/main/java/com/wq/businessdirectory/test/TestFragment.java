@@ -12,25 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bilibili.boxing.Boxing;
-import com.bilibili.boxing.model.entity.BaseMedia;
-import com.bumptech.glide.Glide;
 import com.wq.businessdirectory.R;
-import com.wq.businessdirectory.receiver.PhoneMessage;
+import com.wq.businessdirectory.common.db.DBHelper;
+import com.wq.businessdirectory.receiver.mode.PhoneMessage;
 import com.wq.support.uibase.BaseFragment;
 import com.wq.support.utils.ToastUtil;
 import com.wq.support.utils.log.Logger;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.Component;
 import io.realm.Realm;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
@@ -49,36 +45,36 @@ import static com.wq.support.utils.EmptyDeal._EMPTY;
  */
 
 public class TestFragment extends BaseFragment {
-    protected LocalBroadcastManager mLocalBroadcastManager;
+
     @Bind(R.id.tv_content)
     TextView tvContent;
     BroadcastReceiver smsReceiver, phoneReceiver;
     String phoneNumber;
     @Bind(R.id.btn_clear)
     Button btnClear;
+    @Inject
+    protected LocalBroadcastManager mLocalBroadcastManager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_test, container, false);
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(getActivity());
         ButterKnife.bind(this, view);
+        DaggerAppComponet.
+                builder().
+                appModel(new AppModel(getContext())).
+                build().
+                inject(this);
+
         registerSMSReceiver();
         registerPhoneReceiver();
-
         return view;
     }
-
-
 
 
     public static Fragment newInstance() {
         return new TestFragment();
     }
-
-
-
-
 
 
     @PermissionSuccess(requestCode = 100)
@@ -96,12 +92,13 @@ public class TestFragment extends BaseFragment {
                                            String permissions[], int[] grantResults) {
         PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
+
     void registerSMSReceiver() {
 
         smsReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                PhoneMessage message = (PhoneMessage) intent.getSerializableExtra(EXTRA_MESSAGE);
+                PhoneMessage message = DBHelper.getMode(intent, PhoneMessage.class);
                 tvContent.setText(message + "\n" + tvContent.getText());
             }
         };
@@ -147,14 +144,14 @@ public class TestFragment extends BaseFragment {
         try {
             mLocalBroadcastManager.unregisterReceiver(smsReceiver);
             mLocalBroadcastManager.unregisterReceiver(phoneReceiver);
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
 
     @OnClick(R.id.btn_clear)
     public void onClick() {
-        Realm realm=     Realm.getDefaultInstance();
+        Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.deleteAll();
         realm.commitTransaction();

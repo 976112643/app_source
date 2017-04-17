@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/x20"
+            android:background="#5C6BC0"
             android:src="@mipmap/up"
             app:layout_behavior="com.wq.businessdirectory.common.widget.ScrollAwareFABBehavior" />
 
@@ -47,17 +48,19 @@
         android:background="@android:color/white"
         android:orientation="horizontal">
 
-        <com.flyco.tablayout.SlidingTabLayout
-            android:id="@+id/sliding_tabs"
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x88"
-            android:background="@color/white"
-            app:tl_indicator_corner_radius="@dimen/x4"
-            app:tl_indicator_height="@dimen/x4"
-            app:tl_tab_space_equal="true"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            app:tl_iconHeight="23dp"
+            app:tl_iconWidth="23dp"
+            app:tl_iconMargin="0dp"
             app:tl_textSelectColor="#5C6BC0"
             app:tl_textUnselectColor="#9FA8DA"
-            app:tl_textsize="14sp"/>
+            app:tl_textsize="14sp" />
     </LinearLayout>
 </RelativeLayout>
 

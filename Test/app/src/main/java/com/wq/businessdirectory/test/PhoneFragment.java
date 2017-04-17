@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.wq.businessdirectory.R;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
-import com.wq.businessdirectory.receiver.PhoneRecord;
+import com.wq.businessdirectory.receiver.mode.PhoneRecord;
 import com.wq.businessdirectory.test.adapter.PhoneRecordAdapter;
 
 import io.realm.Sort;

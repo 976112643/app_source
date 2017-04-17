@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.wq.businessdirectory.R;
 import com.wq.businessdirectory.common.ui.RecycleViewFragment;
-import com.wq.businessdirectory.receiver.PhoneMessage;
+import com.wq.businessdirectory.receiver.mode.PhoneMessage;
 import com.wq.businessdirectory.test.adapter.SmsAdapter;
 
 import io.realm.Sort;
