@@ -144,13 +144,20 @@ public class TestFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        mLocalBroadcastManager.unregisterReceiver(smsReceiver);
-        mLocalBroadcastManager.unregisterReceiver(phoneReceiver);
+        try {
+            mLocalBroadcastManager.unregisterReceiver(smsReceiver);
+            mLocalBroadcastManager.unregisterReceiver(phoneReceiver);
+        }catch (Exception e) {
+
+        }
     }
 
     @OnClick(R.id.btn_clear)
     public void onClick() {
-        Realm.getDefaultInstance().deleteAll();
+        Realm realm=     Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.deleteAll();
+        realm.commitTransaction();
         ToastUtil.shortM("数据已清除");
     }
 }

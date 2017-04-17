@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.wq.businessdirectory.receiver.mode.PhoneMessage;
+
+import static com.wq.businessdirectory.common.db.DBHelper.put2Intent;
+
 /**
  * Created by WQ on 2017/4/7.
  */
@@ -16,10 +20,11 @@ public class LocalBroadcastHelper {
     public static final String EXTRA_PHONE_NUMBER = "EXTRA_PHONE_NUMBER";
     public static final String EXTRA_PHONE_STATE = "EXTRA_PHONE_STATE";
     public static final int CALL_STATE_OUT = 0x0911;
+
     public static void sendMessageBroadcast(Context context, PhoneMessage phoneMessage) {
-//        Intent broadcast = new Intent(ACTION_MESSAGE)
-//                .putExtra(EXTRA_MESSAGE, phoneMessage);
-//        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcast);
+        Intent broadcast = new Intent(ACTION_MESSAGE);
+        put2Intent(broadcast, phoneMessage);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(broadcast);
     }
 
     public static void sendPhoneBroadcast(Context context, int state, String incomingNumber) {
@@ -29,10 +34,11 @@ public class LocalBroadcastHelper {
         LocalBroadcastManager.getInstance(context).sendBroadcast(broadcast);
     }
 
-    public static IntentFilter getMessageFilter(){
-       return new IntentFilter(ACTION_MESSAGE);
+    public static IntentFilter getMessageFilter() {
+        return new IntentFilter(ACTION_MESSAGE);
     }
-    public static IntentFilter getPhoneFilter(){
+
+    public static IntentFilter getPhoneFilter() {
         return new IntentFilter(ACTION_PHONE);
     }
 }

@@ -1,9 +1,13 @@
-package com.wq.businessdirectory.receiver;
+package com.wq.businessdirectory.receiver.mode;
+
+import com.wq.businessdirectory.common.db.DBHelper;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
+ * 通话记录实体类
  * Created by WQ on 2017/4/14.
  */
 
@@ -11,12 +15,16 @@ public class PhoneRecord extends RealmObject {
     String phone;
     String type;
     String record_time;
-    long add_time=System.currentTimeMillis();
-    public static void addPhoneRecord(Realm realm, PhoneRecord phoneRecord){
+    @PrimaryKey
+    int _id = DBHelper.generateId();
+    long add_time = System.currentTimeMillis();
+
+    public static void addPhoneRecord(Realm realm, PhoneRecord phoneRecord) {
         realm.beginTransaction();
         realm.copyToRealm(phoneRecord);
         realm.commitTransaction();
     }
+
     public String getPhone() {
         return phone;
     }

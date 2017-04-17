@@ -1,24 +1,31 @@
-package com.wq.businessdirectory.receiver;
+package com.wq.businessdirectory.receiver.mode;
 
-import android.content.Context;
+import com.wq.businessdirectory.common.db.DBHelper;
+import com.wq.businessdirectory.common.db.mode.RealmSerializable;
 
 import java.io.Serializable;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
+ * 短消息实体类
  */
-public class PhoneMessage extends RealmObject {
+public class PhoneMessage extends RealmObject implements RealmSerializable {
     String phone;
     String content;
     String addtime;
-    long add_time=System.currentTimeMillis();
-    public static void addSMS(Realm realm,PhoneMessage phoneMessage){
+    @PrimaryKey
+    int _id = DBHelper.generateId();
+    long add_time = System.currentTimeMillis();
+
+    public static void addSMS(Realm realm, PhoneMessage phoneMessage) {
         realm.beginTransaction();
         realm.copyToRealm(phoneMessage);
         realm.commitTransaction();
     }
+
     @Override
     public String toString() {
         return "PhoneMessage{" +
@@ -35,7 +42,6 @@ public class PhoneMessage extends RealmObject {
     public void setAddtime(String addtime) {
         this.addtime = addtime;
     }
-
 
 
     public String getPhone() {
@@ -55,4 +61,8 @@ public class PhoneMessage extends RealmObject {
         this.content = content;
     }
 
+    @Override
+    public int getID() {
+        return _id;
+    }
 }
